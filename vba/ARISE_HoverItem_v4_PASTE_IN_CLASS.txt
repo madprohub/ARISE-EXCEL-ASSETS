@@ -1,0 +1,63 @@
+Option Explicit
+Private WithEvents mButton As MSForms.CommandButton
+Private WithEvents mList As MSForms.ListBox
+Private mKind As String
+Private mBaseBack As Long
+Private mBaseFore As Long
+Private mBaseBorder As Long
+Private mBaseBold As Boolean
+Private mCursor As StdPicture
+Public Sub AttachButton(ByVal ctrl As MSForms.CommandButton, ByVal kind As String, ByVal icon As StdPicture)
+    Set mButton = ctrl
+    mKind = kind
+    mBaseBack = ctrl.BackColor
+    mBaseFore = ctrl.ForeColor
+    mBaseBold = ctrl.Font.Bold
+    Set mCursor = icon
+    ApplyCursor ctrl
+End Sub
+Public Sub AttachList(ByVal ctrl As MSForms.ListBox, ByVal icon As StdPicture)
+    Set mList = ctrl
+    mKind = "LIST"
+    mBaseBorder = ctrl.BorderColor
+    Set mCursor = icon
+    ApplyCursor ctrl
+End Sub
+Private Sub ApplyCursor(ByVal ctrl As Object)
+    On Error Resume Next
+    If Not mCursor Is Nothing Then
+        Set ctrl.MouseIcon = mCursor
+        ctrl.MousePointer = 99
+    End If
+    On Error GoTo 0
+End Sub
+Public Sub ResetVisual()
+    On Error Resume Next
+    If Not mButton Is Nothing Then
+        mButton.BackColor = mBaseBack
+        mButton.ForeColor = mBaseFore
+        mButton.Font.Bold = mBaseBold
+    End If
+    If Not mList Is Nothing Then mList.BorderColor = mBaseBorder
+    On Error GoTo 0
+End Sub
+Public Sub SetHighlight()
+    On Error Resume Next
+    If Not mButton Is Nothing Then
+        Select Case mKind
+            Case "OPEN", "WORK": mButton.BackColor = RGB(10, 119, 169)
+            Case "CLEAR": mButton.BackColor = RGB(112, 37, 171)
+            Case "CLOSE": mButton.BackColor = RGB(166, 26, 85)
+        End Select
+        mButton.ForeColor = RGB(255, 255, 255)
+        mButton.Font.Bold = True
+    End If
+    If Not mList Is Nothing Then mList.BorderColor = RGB(0, 238, 255)
+    On Error GoTo 0
+End Sub
+Private Sub mButton_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    ARISE_HoverFX_v4.HighlightItem Me
+End Sub
+Private Sub mList_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    ARISE_HoverFX_v4.HighlightItem Me
+End Sub
