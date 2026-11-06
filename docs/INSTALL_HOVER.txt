@@ -1,0 +1,13 @@
+ARISE.v9 HOVER FX v4 - SAFE INSTALL
+BACKUP the workbook first. Preserve all existing animation, search, and navigation code.
+1. ALT+F11 > File > Import File > vba/ARISE_HoverItem_v4.cls
+2. Import File > vba/ARISE_HoverFX_v4.bas
+3. In EXISTING frmSmartSearch.UserForm_Activate, append:
+   ARISE_HoverFX_v4.StartHover Me, ARISE_AssetFolder() & "ARISE_Neon_Cursor.ico"
+4. Place the cursor in the workbook-adjacent ARISE_NEON_ASSETS folder, or adapt to a cached downloaded asset.
+5. In EXISTING UserForm_QueryClose, append ARISE_HoverFX_v4.StopHover.
+6. Optional UserForm_MouseMove: ARISE_HoverFX_v4.ClearHover
+7. Debug > Compile VBAProject. Save, close, reopen, test.
+NOTE: The ICO may not be supported by LoadPicture on some systems; cursor fallback remains normal.
+NOTE: No support for controls nested inside Frame containers in this version.
+NOTE: Do not run old ARISE_HoverFX alongside v4.
