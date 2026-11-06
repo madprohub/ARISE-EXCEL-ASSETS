@@ -1,0 +1,10 @@
+ARISE PREMIUM ASSET LOADER
+1. Upload 18 JPGs into assets/premium/ (not the ZIP).
+2. Verify https://raw.githubusercontent.com/madprohub/ARISE-EXCEL-ASSETS/main/assets/premium/frame_00.jpg
+3. Back up workbook, import vba/ARISE_GitHub_AssetCache.bas.
+4. Run ARISE_DownloadPremiumFrames once.
+5. In existing ARISE_NeonEngine, change ONLY the ARISE_AssetFolder function's return line to:
+   ARISE_AssetFolder = ARISE_CacheFolder()
+6. In Immediate Window: ? ARISE_CacheComplete()
+7. Verify animation moves. Keep original folder as backup until tested.
+Downloads may be blocked by network policy; not cryptographically verified.
